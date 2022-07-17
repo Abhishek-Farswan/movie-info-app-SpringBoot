@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset = "ISO-8859-1"/>
+    <title>Update Director</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+h1 {
+  text-align: center;
+}
+</style>
+
+    <script>
+         $(document).ready(function() {
+            $("button").click(function() {
+               var newDirector = {
+                      "dirName": document.getElementById("addDir").elements[0].value,
+                         "age": document.getElementById("addDir").elements[1].value,
+                        "awards": document.getElementById("addDir").elements[2].value,
+               };
+
+               if(!newDirector.dirName)
+                {
+                alert("Please fill all the details");
+                }else{
+                    var requestJSON = JSON.stringify(newDirector);
+               $.ajax({
+                  type : "PUT",
+                  url : "http://localhost:9095/directors",
+                contentType : "application/json",
+                  async: false,
+                  cache: false,
+                  dataType : "text",
+                  data : requestJSON,
+                  success : function(response) {
+                    alert(response);
+                  },
+                  error : function() {
+                  alert("Error occured while updating director");
+                  }
+               });
+                }
+            });
+         });
+      </script>
+
+</head>
+
+<link rel="stylesheet" href="css/style.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<body>
+<div class="container-fluid">
+
+    <div class="row" >
+        <div class="d-flex justify-content-center   container my-4">
+            <img src="../static/logos/movie.jpg" th:src="@{/logos/movie.jpg}"/>
+        </div>
+    </div>
+<h1>Update Director</h1>
+
+
+<div class="container center_div">
+    <br/><br/><br/>
+    <h3>Enter Director details</h3>
+    <form id="addDir">
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example1">Full Name</label>
+            <input type="text" id="form3Example1" class="form-control" />
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form3Example3">Age</label>
+                    <input type="number" id="form3Example3" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example4">Awards Won</label>
+            <input type="number" id="form3Example4" class="form-control" />
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Update Director</button>
+    </form>
+</div>
+</div>
+</body>
+</html>

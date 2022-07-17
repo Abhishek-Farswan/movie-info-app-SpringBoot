@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset = "ISO-8859-1"/>
+    <title>View Movies</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+h1 {
+  text-align: center;
+}
+</style>
+
+    <script>
+         $(document).ready(function(){
+      var i=0;
+        $.getJSON("http://localhost:9095/films", function(response){
+               $.each(response, function(key,value) {
+               var dirc="";
+               $.each(response[i].directors,function(j,item){
+               dirc+=item.dirName+", ";
+               });
+
+               $('<tr>').html("<td>" + response[i].filmID + "</td><td>" + response[i].movieName + "</td><td>" + response[i].collect + "</td><td>"+ response[i].ratings + "</td><td>"+ dirc +"</td></td>").appendTo('#added-articles');
+                i=i+1;
+               });
+            });
+         });
+
+      </script>
+</head>
+
+
+<link rel="stylesheet" href="css/style.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<body>
+
+
+<div class="container-fluid">
+
+    <div class="row" >
+        <div class="d-flex justify-content-center   container my-4">
+            <img src="../static/logos/movie.jpg" th:src="@{/logos/movie.jpg}"/>
+        </div>
+    </div>
+<h1>Displaying all Movies</h1>
+<div id = "productsJson"> </div>
+<table id="added-articles" class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th>Movie ID</th>
+        <th>Movie Name</th>
+        <th>Box Office Collections</th>
+        <th>Ratings</th>
+        <th>Directors</th>
+    </tr>
+    </thead>
+</table>
+</div>
+</body>
+</html>

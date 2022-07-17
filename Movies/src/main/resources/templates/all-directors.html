@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:border-radius="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>View Directors</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <meta name="viewport" content="width=device-width,initial-scale=0.5">
+    <style>
+h1 {
+  text-align: center;
+}
+</style>
+
+    <script>
+    $(document).ready(function(){
+      var i=0;
+        $.getJSON("http://localhost:9095/directors", function(response){
+               $.each(response, function(key,value) {
+               $('<tr>').html("<td>" + response[i].dirName + "</td><td>" + response[i].gender + "</td><td>" + response[i].age + "</td><td>"+ response[i].awards + "</td>").appendTo('#added-articles');
+                i=i+1;
+               });
+            });
+         });
+      </script>
+</head>
+
+<link rel="stylesheet" href="css/style.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<body>
+
+<div class="container-fluid">
+
+    <div class="row" >
+        <div class="d-flex justify-content-center   container my-4">
+            <img src="../static/logos/movie.jpg" th:src="@{/logos/movie.jpg}"/>
+        </div>
+    </div>
+
+
+
+<h1>Displaying all Directors</h1>
+<div id="lol"></div>
+<table id="added-articles" class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th>Director Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Awards Won</th>
+    </tr>
+    </thead>
+</table>
+</div>
+</body>
+</html>
